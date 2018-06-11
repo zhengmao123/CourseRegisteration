@@ -26,9 +26,8 @@
         <activity android:name=".OfferedCourse" />
         <activity android:name=".Schedule" />
         <activity android:name=".CourseInformation" />
+        <activity android:name=".UserProfile"/>
 
-
-        <activity android:name=".UserProfile"></activity>
     </application>
 
 </manifest>
