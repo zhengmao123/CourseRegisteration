@@ -19,7 +19,6 @@ public class Activity_OfferedCourse extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offered_course);
     }
