@@ -42,9 +42,9 @@ public class Activity_SignIn extends AppCompatActivity {
         }
 
 
-        buttonSignIn = (Button)findViewById(R.id.buttonSignIn);
-        editTextEmail = (EditText)findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText)findViewById(R.id.editTextPassword);
+        buttonSignIn = (Button)findViewById(R.id.buttonSignin);
+        editTextEmail = (EditText)findViewById(R.id.inputEmail);
+        editTextPassword = (EditText)findViewById(R.id.inputPassword);
         message = (TextView) findViewById(R.id.Message);
 
 
