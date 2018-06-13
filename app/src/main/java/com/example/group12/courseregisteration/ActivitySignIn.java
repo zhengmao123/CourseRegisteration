@@ -35,7 +35,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() == null)
+        if (mAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(getApplicationContext(),ActivityUserProfile.class));
         }
