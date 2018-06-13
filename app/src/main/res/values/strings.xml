@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">CourseRegisteration</string>
-    <string name="ID">ID</string>
     <string name="sign_in_button">Sign in</string>
 
 </resources>

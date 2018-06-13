@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Activity_SignIn extends AppCompatActivity {
 
-    private Button buttonSignIn;
+    Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private FirebaseAuth mAuth;
