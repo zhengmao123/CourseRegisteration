@@ -15,17 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ActivitySignIn">
+        <activity android:name=".Activity_SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivityOfferedCourse" />
-        <activity android:name=".ActivitySchedule" />
-        <activity android:name=".ActivityCourseInformation" />
-        <activity android:name=".ActivityUserProfile" />
+        <activity android:name=".Activity_OfferedCourse" />
+        <activity android:name=".Activity_Schedule" />
+        <activity android:name=".Activity_CourseInformation" />
+        <activity android:name=".Activity_UserProfile" />
 
 
 

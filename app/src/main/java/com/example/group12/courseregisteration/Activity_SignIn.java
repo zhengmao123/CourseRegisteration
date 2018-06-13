@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import android.graphics.Color;
 
-public class ActivitySignIn extends AppCompatActivity {
+public class Activity_SignIn extends AppCompatActivity {
 
     Button buttonSignIn;
     private EditText editTextEmail;
@@ -37,7 +37,7 @@ public class ActivitySignIn extends AppCompatActivity {
 
         if (mAuth.getCurrentUser() != null)
         {
-            startActivity(new Intent(getApplicationContext(),ActivityUserProfile.class));
+            startActivity(new Intent(getApplicationContext(),Activity_UserProfile.class));
         }
 
 
@@ -86,7 +86,7 @@ public class ActivitySignIn extends AppCompatActivity {
                             message.setText("Verification success!");
                             message.setTextColor(Color.GREEN);
                             finish();
-                            startActivity(new Intent(getApplicationContext(), ActivityUserProfile.class));
+                            startActivity(new Intent(getApplicationContext(), Activity_UserProfile.class));
                         }
                         else{
                             message.setText("Invaild email or password!");
