@@ -18,16 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.graphics.Color;
 
-public class Activity_UserProfile extends AppCompatActivity {
-
-    private FirebaseAuth mAuth;
+public class ActivitySchedule extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
-
-
-
+        setContentView(R.layout.activity_schedule);
     }
 }

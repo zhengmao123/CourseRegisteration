@@ -18,11 +18,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.graphics.Color;
 
-public class Activity_CourseInformation extends AppCompatActivity {
+public class ActivityUserProfile extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_information);
+        setContentView(R.layout.activity_user_profile);
+
+
+
     }
 }

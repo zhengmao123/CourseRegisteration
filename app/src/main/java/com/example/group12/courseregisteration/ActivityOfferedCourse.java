@@ -20,7 +20,7 @@ import android.graphics.Color;
 
 import android.graphics.Color;
 
-public class Activity_OfferedCourse extends AppCompatActivity {
+public class ActivityOfferedCourse extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -14,11 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import android.graphics.Color;
 
-public class Activity_SignIn extends AppCompatActivity {
+public class ActivitySignIn extends AppCompatActivity {
 
     Button buttonSignIn;
     private EditText editTextEmail;
@@ -38,7 +37,7 @@ public class Activity_SignIn extends AppCompatActivity {
 
         if (mAuth.getCurrentUser() == null)
         {
-            startActivity(new Intent(getApplicationContext(),Activity_UserProfile.class));
+            startActivity(new Intent(getApplicationContext(),ActivityUserProfile.class));
         }
 
 
@@ -87,7 +86,7 @@ public class Activity_SignIn extends AppCompatActivity {
                             message.setText("Verification success!");
                             message.setTextColor(Color.GREEN);
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Activity_UserProfile.class));
+                            startActivity(new Intent(getApplicationContext(), ActivityUserProfile.class));
                         }
                         else{
                             message.setText("Invaild email or password!");
