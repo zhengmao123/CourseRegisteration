@@ -3,11 +3,11 @@ package com.example.group12.courseregisteration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CourseInformation extends AppCompatActivity {
+public class Activity_UserProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_information);
+        setContentView(R.layout.activity_user_profile);
     }
 }

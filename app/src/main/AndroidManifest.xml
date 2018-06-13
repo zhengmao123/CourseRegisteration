@@ -15,18 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".OfferedCourse" />
-        <activity android:name=".Schedule" />
-        <activity android:name=".CourseInformation" />
-        <activity android:name=".UserProfile"/>
+        <activity android:name=".Activity_OfferedCourse" />
+        <activity android:name=".Activity_Schedule" />
+        <activity android:name=".Activity_CourseInformation" />
+        <activity android:name=".Activity_UserProfile"/>
 
     </application>
 
