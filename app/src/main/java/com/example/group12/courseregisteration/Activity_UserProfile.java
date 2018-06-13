@@ -18,16 +18,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.graphics.Color;
 
-public class Activity_UserProfile extends AppCompatActivity {
+public class Activity_UserProfile extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
+    private Button cv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        cv = findViewById(R.id.courseView);
+
+        cv.setOnClickListener(this);
 
 
+    }
+
+    public void onClick(View v) {
+        if(v==cv)
+        {
+            finish();
+            startActivity(new Intent(this, Activity_OfferedCourse.class));
+        }
 
     }
 }

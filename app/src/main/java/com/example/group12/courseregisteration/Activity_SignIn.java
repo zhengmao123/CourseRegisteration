@@ -36,10 +36,11 @@ public class Activity_SignIn extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() == null)
+        if (mAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(getApplicationContext(),Activity_UserProfile.class));
         }
+
 
 
         buttonSignIn = (Button)findViewById(R.id.buttonSignIn);
