@@ -14,32 +14,42 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.graphics.Color;
 
-public class Activity_UserProfile extends AppCompatActivity implements View.OnClickListener {
+public class Activity_UserProfile extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-    private Button cv;
+    Button buttonSignOut;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        cv = findViewById(R.id.courseView);
 
-        cv.setOnClickListener(this);
-
-
-    }
-
-    public void onClick(View v) {
-        if(v==cv)
-        {
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() == null){
             finish();
-            startActivity(new Intent(this, Activity_OfferedCourse.class));
+            startActivity(new Intent(this,Activity_SignIn.class));
         }
+
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        buttonSignOut =(Button)findViewById(R.id.buttonSignOut);
+
+        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mAuth.signOut();
+                finish();
+                startActivity(new Intent(getApplicationContext(), Activity_SignIn.class));
+            }
+        });
+
+
 
     }
 }
