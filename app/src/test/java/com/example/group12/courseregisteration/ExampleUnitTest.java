@@ -15,14 +15,15 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+    //test time conflict
     @Test
     public void DateTime_Conflict(){
 
-        DateTime dateTime1 = new DateTime("MWF", "1.00", "2.00");
-        DateTime dateTime2 = new DateTime("MWF", "2.00", "5.00");
-        DateTime dateTime3 = new DateTime("MWF", "8.00", "9.00");
-        DateTime dateTime4 = new DateTime("MWF", "11.00", "12.00");
-        DateTime dateTime5 = new DateTime("TR", "11.00", "12.00");
+        DateTime dateTime1 = new DateTime("MWF", "1:00", "2:00");
+        DateTime dateTime2 = new DateTime("MWF", "2:00", "5:00");
+        DateTime dateTime3 = new DateTime("MWF", "8:00", "9:00");
+        DateTime dateTime4 = new DateTime("MWF", "11:00", "12:00");
+        DateTime dateTime5 = new DateTime("TR", "11:00", "12:00");
 
         //1- has conflict  0-no conflict
         DateTimeConflict test1 = new DateTimeConflict();
