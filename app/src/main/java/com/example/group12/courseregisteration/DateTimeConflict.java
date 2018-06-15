@@ -34,7 +34,7 @@ public class DateTimeConflict {
 
     }
 
-    //return 1 if datetime has conflict with datetime stored in the list
+    //return 1 if datetime has conflict
     public int TestResult(){
 
         if(result == true){
