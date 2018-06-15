@@ -20,11 +20,10 @@ import android.graphics.Color;
 
 public class Activity_SignIn extends AppCompatActivity {
 
-    Button buttonSignIn;
+    private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView message;
-
     private FirebaseAuth mAuth;
 
     @Override

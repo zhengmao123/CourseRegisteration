@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activity_OfferedCourse" />
+        <activity android:name=".Activity_OfferedCourses" />
         <activity android:name=".Activity_Schedule" />
         <activity android:name=".Activity_CourseInformation" />
         <activity android:name=".Activity_UserProfile" />
