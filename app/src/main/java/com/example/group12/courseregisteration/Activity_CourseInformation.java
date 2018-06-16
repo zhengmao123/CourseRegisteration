@@ -1,19 +1,21 @@
 package com.example.group12.courseregisteration;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.graphics.Color;
+import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import android.graphics.Color;
+import java.util.LinkedList;
 
 public class Activity_CourseInformation extends AppCompatActivity {
 
@@ -33,13 +35,20 @@ public class Activity_CourseInformation extends AppCompatActivity {
 
     //string
     private String course_id;
-    private String student_id;
     private String name;
     private String prof;
     private String location;
     private String date;
     private String start;
     private String end;
+
+
+    //direct to student_id, the child of root Students in Firebase
+    final String student_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference sRef = FirebaseDatabase.getInstance().getReference().child("Students").child(student_id);
+
+    //list to store the record of time conflict test
+    private LinkedList<String> testDateTimeRecord = new LinkedList<>();
 
 
     @Override
@@ -74,12 +83,43 @@ public class Activity_CourseInformation extends AppCompatActivity {
         });
 
 
+        //test whether this course has conflict with course already registered
+        //record the test record for each comparson
+        testDateTimeRecord.clear();
+        sRef.child("Courses").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+
+                    String d = child.child("Date").getValue(String.class);
+                    String s = child.child("TimeStart").getValue(String.class);
+                    String e = child.child("TimeEnd").getValue(String.class);
+
+                    DateTime enrolled_time = new DateTime(d, s, e);
+                    DateTime new_time = new DateTime(date, start, end);
+
+                    DateTimeConflict test = new DateTimeConflict();
+                    if (test.TimeConflict(enrolled_time, new_time))
+                        testDateTimeRecord.add("conflict");
+                    else
+                        testDateTimeRecord.add("pass");
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+
+        //assign buttons
         buttonBack = (Button)findViewById(R.id.buttonBack);
         buttonDrop = (Button)findViewById(R.id.buttonDrop);
         buttonRegister = (Button)findViewById(R.id.buttonRegister);
 
+
         //back button
-        buttonBack = (Button) findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,19 +129,15 @@ public class Activity_CourseInformation extends AppCompatActivity {
         });
 
 
-
-
         //Drop button
-        /*
-        buttonDrop = (Button) findViewById(R.id.buttonDrop);
         buttonDrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sRef.child("Courses").child(course_id).setValue(null);
+                Toast.makeText(getApplicationContext(), "Drop Success!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
             }
         });
-
-
 
         //Register button
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
@@ -109,12 +145,34 @@ public class Activity_CourseInformation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //if the test record of conflict test contains a "conflict" record
+                if(testDateTimeRecord.contains("conflict")) {
+
+                    //report error of time conflict
+                    Toast.makeText(getApplicationContext(), "Can't register! Time conflict!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
+
+                }
+                //if not
+                else{
+
+                    //register the course with attributes
+                    sRef.child("Courses").child(course_id).child("Professor").setValue(prof);
+                    sRef.child("Courses").child(course_id).child("CourseName").setValue(name);
+                    sRef.child("Courses").child(course_id).child("Date").setValue(date);
+                    sRef.child("Courses").child(course_id).child("Location").setValue(location);
+                    sRef.child("Courses").child(course_id).child("TimeStart").setValue(start);
+                    sRef.child("Courses").child(course_id).child("TimeEnd").setValue(end);
+
+                    //report register success
+                    Toast.makeText(getApplicationContext(), "Register Success!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
+
+                }
+
             }
+
         });
-
-        */
-
-
 
     }
 
