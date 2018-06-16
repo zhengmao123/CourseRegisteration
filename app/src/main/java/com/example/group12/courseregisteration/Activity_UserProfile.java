@@ -61,11 +61,9 @@ public class Activity_UserProfile extends AppCompatActivity {
         buttonSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Activity_Schedule.class));
+                startActivity(new Intent(getApplicationContext(), Activity_Schedule_Mon.class));
             }
         });
-
-
 
 
 
