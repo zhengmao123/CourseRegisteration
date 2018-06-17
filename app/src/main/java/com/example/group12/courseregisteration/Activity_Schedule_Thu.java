@@ -10,14 +10,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.LinkedList;
 
 
@@ -30,13 +28,9 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
     private Button buttonThu;
     private Button buttonFri;
 
-    private Button buttonShowSchedule;
-
-
     private TextView DateView;
 
     private LinkedList<Course> Thursday_courses = new LinkedList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +38,13 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-
         //direct to student_id, the child of root Students in Firebase
         final String student_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference sRef = FirebaseDatabase.getInstance()
                 .getReference().child("Students").child(student_id).child("Courses");
 
-
         //add courses in specific date course list
+        //display courses
         sRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -78,6 +71,10 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
                     }
 
                 }
+
+                //display courses on the pad
+                displayDailyCourses(Thursday_courses);
+
             }
 
             @Override
@@ -91,25 +88,13 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
         DateView = (TextView) findViewById(R.id.textViewDate);
         DateView.setText("Thursday");
 
-        //set button click
-        buttonShowSchedule =(Button)findViewById(R.id.buttonShowSchedule);
-        buttonShowSchedule.setBackgroundColor(Color.parseColor("#FFA500"));
-
+        //set buttons
         buttonMon = (Button) findViewById(R.id.buttonMon);
         buttonTue = (Button) findViewById(R.id.buttonTue);
         buttonWed = (Button) findViewById(R.id.buttonWed);
         buttonThu = (Button) findViewById(R.id.buttonThu);
         buttonFri = (Button) findViewById(R.id.buttonFri);
         buttonBack = (Button) findViewById(R.id.buttonBack);
-
-        buttonShowSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //display course on the pad
-                displayDailyCourses(Thursday_courses);
-            }
-        });
-
 
         buttonMon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,8 +134,6 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
         });
 
 
-
-
     }
 
     //display course method
@@ -183,7 +166,7 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
             RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
-            lParam.topMargin = (Start_time - 420) * 4;
+            lParam.topMargin = (Start_time - 400) * 4;
             lParam.leftMargin = 24;
 
             EventView.setLayoutParams(lParam);
@@ -194,7 +177,7 @@ public class Activity_Schedule_Thu extends AppCompatActivity {
             EventView.setGravity(0x11);
             EventView.setTextColor(Color.BLACK);
             EventView.setText(start + " - " + end + "\n" + name + "\n" + "Professor: " + professor + "\n" + "Location: " + location);
-            EventView.setBackgroundColor(Color.parseColor("#FFA500"));
+            EventView.setBackgroundColor(Color.parseColor("#FAD7A0"));
 
             RelativeLayout mLayout = (RelativeLayout) findViewById(R.id.left_event_column);
             mLayout.addView(EventView);

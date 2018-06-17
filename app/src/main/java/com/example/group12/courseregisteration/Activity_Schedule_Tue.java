@@ -10,14 +10,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.LinkedList;
 
 
@@ -29,8 +27,6 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
     private Button buttonWed;
     private Button buttonThu;
     private Button buttonFri;
-
-    private Button buttonShowSchedule;
 
     private TextView DateView;
 
@@ -44,15 +40,13 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
-
-
         //direct to student_id, the child of root Students in Firebase
         final String student_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference sRef = FirebaseDatabase.getInstance()
                 .getReference().child("Students").child(student_id).child("Courses");
 
-
         //add courses in specific date course list
+        //display courses
         sRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -79,6 +73,9 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
                     }
 
                 }
+
+                //display course on the pad
+                displayDailyCourses(Tuesday_courses);
             }
 
             @Override
@@ -88,18 +85,11 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
         });
 
 
-        //display course on the pad
-        displayDailyCourses(Tuesday_courses);
-
-
         //display date
         DateView = (TextView) findViewById(R.id.textViewDate);
         DateView.setText("Tuesday");
 
         //set button click
-        buttonShowSchedule =(Button)findViewById(R.id.buttonShowSchedule);
-        buttonShowSchedule.setBackgroundColor(Color.parseColor("#FFA500"));
-
         buttonMon = (Button) findViewById(R.id.buttonMon);
         buttonTue = (Button) findViewById(R.id.buttonTue);
         buttonWed = (Button) findViewById(R.id.buttonWed);
@@ -107,14 +97,6 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
         buttonFri = (Button) findViewById(R.id.buttonFri);
         buttonBack = (Button) findViewById(R.id.buttonBack);
 
-
-        buttonShowSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //display course on the pad
-                displayDailyCourses(Tuesday_courses);
-            }
-        });
 
         buttonMon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,8 +136,6 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
         });
 
 
-
-
     }
 
     //display course method
@@ -169,7 +149,6 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
             String professor = daily_courses.get(i).getCourseProfessor();
             String location = daily_courses.get(i).getCourseLocation();
 
-
             String[] start_hourMinutes = start.split(":");
             int start_hr = Integer.parseInt(start_hourMinutes[0]);
             int start_min = Integer.parseInt(start_hourMinutes[1]);
@@ -180,32 +159,28 @@ public class Activity_Schedule_Tue extends AppCompatActivity {
             int end_min = Integer.parseInt(end_hourMinutes[1]);
             int End_time = (end_hr * 60) + ((end_min * 60) / 100);
 
-
             int BlockHeight = End_time - Start_time;
-
 
             TextView EventView = new TextView(Activity_Schedule_Tue.this);
             RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 
-            lParam.topMargin = (Start_time - 420) * 4;
+            lParam.topMargin = (Start_time - 400) * 4;
             lParam.leftMargin = 24;
 
             EventView.setLayoutParams(lParam);
-
             EventView.setPadding(24, 0, 24, 0);
             EventView.setHeight(BlockHeight * 4);
             EventView.setWidth(1200);
             EventView.setGravity(0x11);
             EventView.setTextColor(Color.BLACK);
             EventView.setText(start + " - " + end + "\n" + name + "\n" + "Professor: " + professor + "\n" + "Location: " + location);
-            EventView.setBackgroundColor(Color.parseColor("#FFA500"));
+            EventView.setBackgroundColor(Color.parseColor("#FAD7A0"));
 
             RelativeLayout mLayout = (RelativeLayout) findViewById(R.id.left_event_column);
             mLayout.addView(EventView);
 
         }
-
 
     }
 
