@@ -151,12 +151,13 @@ public class Activity_Schedule_Wed extends AppCompatActivity {
             String professor = daily_courses.get(i).getCourseProfessor();
             String location = daily_courses.get(i).getCourseLocation();
 
-
+            @NonNull
             String[] start_hourMinutes = start.split(":");
             int start_hr = Integer.parseInt(start_hourMinutes[0]);
             int start_min = Integer.parseInt(start_hourMinutes[1]);
             int Start_time = (start_hr * 60) + ((start_min * 60) / 100);
 
+            @NonNull
             String[] end_hourMinutes = end.split(":");
             int end_hr = Integer.parseInt(end_hourMinutes[0]);
             int end_min = Integer.parseInt(end_hourMinutes[1]);
