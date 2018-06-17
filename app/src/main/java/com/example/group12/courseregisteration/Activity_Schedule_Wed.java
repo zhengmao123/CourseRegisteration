@@ -139,6 +139,7 @@ public class Activity_Schedule_Wed extends AppCompatActivity {
 
     }
 
+    @NonNull
     //display course method
     public void displayDailyCourses(LinkedList<Course> daily_courses) {
 

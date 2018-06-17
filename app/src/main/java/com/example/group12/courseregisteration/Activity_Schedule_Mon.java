@@ -136,6 +136,7 @@ public class Activity_Schedule_Mon extends AppCompatActivity {
 
     }
 
+    @NonNull
     //display course method
     private void displayDailyCourses(LinkedList<Course> daily_courses) {
 
@@ -146,7 +147,6 @@ public class Activity_Schedule_Mon extends AppCompatActivity {
             String name = daily_courses.get(i).getCourseName();
             String professor = daily_courses.get(i).getCourseProfessor();
             String location = daily_courses.get(i).getCourseLocation();
-
 
             String[] start_hourMinutes = start.split(":");
             int start_hr = Integer.parseInt(start_hourMinutes[0]);

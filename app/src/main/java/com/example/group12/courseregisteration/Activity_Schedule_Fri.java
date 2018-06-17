@@ -140,6 +140,7 @@ public class Activity_Schedule_Fri extends AppCompatActivity {
     }
 
     //display course method
+    @NonNull
     private void displayDailyCourses(LinkedList<Course> daily_courses) {
 
         for (int i = 0; i < daily_courses.size(); i++) {
