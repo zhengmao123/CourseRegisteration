@@ -176,7 +176,7 @@ public class Activity_Schedule_Fri extends AppCompatActivity {
 
             EventView.setPadding(24, 0, 24, 0);
             EventView.setHeight(BlockHeight * 4);
-            EventView.setWidth(1200);
+            EventView.setWidth(491);
             EventView.setGravity(0x11);
             EventView.setTextColor(Color.BLACK);
             EventView.setText(start + " - " + end + "\n" + name + "\n" + "Professor: " + professor + "\n" + "Location: " + location);
