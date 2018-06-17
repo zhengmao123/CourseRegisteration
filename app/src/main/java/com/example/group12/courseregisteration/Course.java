@@ -6,12 +6,21 @@ public class Course {
 
     public Course(String course_name, String course_date, String time_start, String time_end, String location, String professor){
 
-        this.course_name = course_name;
-        this.course_date = course_date;
-        this.time_start = time_start;
-        this.time_end = time_end;
-        this.location = location;
-        this.professor = professor;
+        if(course_date!=null &&
+                course_name!=null &&
+                time_start!=null &&
+                time_end!=null &&
+                location!=null &&
+                professor!=null) {
+
+            this.course_name = course_name;
+            this.course_date = course_date;
+            this.time_start = time_start;
+            this.time_end = time_end;
+            this.location = location;
+            this.professor = professor;
+
+        }
 
     }
     public String getCourseName(){
