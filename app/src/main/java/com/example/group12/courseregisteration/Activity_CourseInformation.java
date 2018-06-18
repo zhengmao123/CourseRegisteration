@@ -15,6 +15,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.graphics.Color;
 
+
+import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+
+
 public class Activity_CourseInformation extends AppCompatActivity {
 
     //text view
@@ -33,7 +38,6 @@ public class Activity_CourseInformation extends AppCompatActivity {
 
     //string
     private String course_id;
-    private String student_id;
     private String name;
     private String prof;
     private String location;
@@ -41,6 +45,9 @@ public class Activity_CourseInformation extends AppCompatActivity {
     private String start;
     private String end;
 
+    //direct to student_id, the child of root Students in Firebase
+    final String student_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    DatabaseReference sRef = FirebaseDatabase.getInstance().getReference().child("Students").child(student_id);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +98,21 @@ public class Activity_CourseInformation extends AppCompatActivity {
 
 
 
-        //Drop button
-        /*
+        //Drop Course button
         buttonDrop = (Button) findViewById(R.id.buttonDrop);
         buttonDrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sRef.child("Courses").child(course_id).child("Professor").setValue(prof);
+                sRef.child("Courses").child(course_id).child("CourseName").setValue(name);
+                sRef.child("Courses").child(course_id).child("Date").setValue(date);
+                sRef.child("Courses").child(course_id).child("Location").setValue(location);
+                sRef.child("Courses").child(course_id).child("TimeStart").setValue(start);
+                sRef.child("Courses").child(course_id).child("TimeEnd").setValue(end);
 
+                //report register success
+                Toast.makeText(getApplicationContext(), "Register Success!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
             }
         });
 
@@ -108,11 +123,13 @@ public class Activity_CourseInformation extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                sRef.child("Courses").child(course_id).setValue(null);
+                Toast.makeText(getApplicationContext(), "Drop Success!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
             }
         });
 
-        */
+
 
 
 
