@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">CourseRegisteration</string>
-    <string name="ID">ID</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signout_button">Sign out</string>
+    <string name="button_offeredcourses">Offered Courses</string>
 
 </resources>
