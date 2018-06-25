@@ -13,6 +13,7 @@ public class Activity_UserProfile extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonOfferedCourses;
     private Button buttonSchedule;
+    private Button changePassword;
     private TextView showEmail;
     private FirebaseAuth mAuth;
 
@@ -33,7 +34,17 @@ public class Activity_UserProfile extends AppCompatActivity {
         buttonSchedule = (Button)findViewById(R.id.buttonSchedule);
 
         showEmail = (TextView)findViewById(R.id.textViewEmail);
+        changePassword = (Button)findViewById(R.id.buttonPassword);
         showEmail.setText(mAuth.getCurrentUser().getEmail());
+
+        //password button
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), ResetPassword.class));
+            }
+        });
 
 
         //sign out button
