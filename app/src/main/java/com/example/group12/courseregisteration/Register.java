@@ -80,7 +80,7 @@ public class Register extends AppCompatActivity {
 
                                         UserInformation userInformation = new UserInformation(email,name,phoneNum, password);
                                         myRef.child("users").child(userID).setValue(userInformation);
-                                        toastMessage("New Information has been saved.");
+                                        toastMessage(String.valueOf(R.string.regMessage));
                                         finish();
                                         startActivity(new Intent(getApplicationContext(), Activity_UserProfile.class));
                                     }

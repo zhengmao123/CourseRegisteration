@@ -93,8 +93,7 @@ public class Activity_SignIn extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             //finish();
-                            message.setText("Verification success!");
-                            message.setTextColor(Color.GREEN);
+                            Toast.makeText(getApplicationContext(), "Verification Success",Toast.LENGTH_SHORT).show();
                             finish();
                             startActivity(new Intent(getApplicationContext(), Activity_UserProfile.class));
                         }

@@ -134,14 +134,34 @@ public class Activity_CourseInformation extends AppCompatActivity {
 
         //Drop button
         buttonDrop.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
-                sRef.child("Courses").child(course_id).setValue(null);
-                int slotNum = Integer.parseInt(slots);
-                slotNum--;
-                myRef.child("Slots").setValue(Integer.toString(slotNum));
-                Toast.makeText(getApplicationContext(), "Drop Success!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
+
+                sRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child("Courses").hasChild(course_id))
+                        {
+                            sRef.child("Courses").child(course_id).setValue(null);
+                            int slotNum = Integer.parseInt(slots);
+                            slotNum--;
+                            myRef.child("Slots").setValue(Integer.toString(slotNum));
+                            Toast.makeText(getApplicationContext(), "Drop Success!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "You cannot drop a course you are not in", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
 
@@ -179,7 +199,7 @@ public class Activity_CourseInformation extends AppCompatActivity {
                     myRef.child("Slots").setValue(Integer.toString(slotNum));
 
                     //report register success
-                    Toast.makeText(getApplicationContext(), "Register Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Register Success!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(), Activity_OfferedCourses.class));
 
                 }
