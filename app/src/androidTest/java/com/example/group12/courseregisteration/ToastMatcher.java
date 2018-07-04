@@ -9,7 +9,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * The type Toast matcher.
+ * The type Toast matcher that matches toast.
+ * Code taken from online tutorial
  */
 public class ToastMatcher extends TypeSafeMatcher<Root> {
 
@@ -18,6 +19,10 @@ public class ToastMatcher extends TypeSafeMatcher<Root> {
         description.appendText("is toast");
     }
 
+    /*
+    *Goes into the view hierarchy and retrieves the toast popup, and then compares it
+    * to comparison text
+     */
     @Override
     public boolean matchesSafely(Root root) {
         int type = root.getWindowLayoutParams().get().type;
@@ -33,7 +38,7 @@ public class ToastMatcher extends TypeSafeMatcher<Root> {
 
 
     /**
-     * Is toast matcher.
+     * Static method for toast-matching comparisons
      *
      * @return the matcher
      */

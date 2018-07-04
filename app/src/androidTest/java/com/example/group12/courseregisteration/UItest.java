@@ -1,6 +1,5 @@
 package com.example.group12.courseregisteration;
 
-import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
@@ -13,22 +12,16 @@ import org.junit.Test;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.anything;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
 
 
 /**
- * The type Project tester.
+ * Tests the UI of the project using espresso
+ * written by Peter and Mao
  */
 public class UItest {
 
@@ -41,6 +34,12 @@ public class UItest {
     public ActivityTestRule<Activity_SignIn> activityTestRule =
             new ActivityTestRule<>(Activity_SignIn.class);
 
+    /**
+     * Init.
+     *
+     * Makes sure every activity starts with the same initial state: Logged out, and on the signin
+     * screen
+     */
     @Before
     public void init(){
         mAuth = FirebaseAuth.getInstance();
@@ -50,9 +49,13 @@ public class UItest {
     }
 
     /**
-     * Create contact test success.
+     * Tests whether a new user can be successfully registered
+     * Method invokes thread.sleep to hopefully get around the timing issues that plague
+     * these tests
+     *
+     * @throws InterruptedException the interrupted exception
      */
-   @Test
+    @Test
     public void registerUser() throws InterruptedException {
         Thread.sleep(2000);
         onView(withId(R.id.regButton)).perform(click());
@@ -65,15 +68,29 @@ public class UItest {
         onView(withText("Test@gmail.ca")).inRoot(new ToastMatcher()).check(matches(withText("Test@gmail.ca")));
     }
 
+    /**
+     * Can a user sign in? This tests that!
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void signIn() throws InterruptedException {
         onView(withId(R.id.editTextEmail)).perform(typeText("Test@gmail.ca"));
         onView(withId(R.id.editTextPassword)).perform(typeText("fake12345"));
         Espresso.closeSoftKeyboard();
         onView(withId(R.id.buttonSignIn)).perform(click());
+        //This is a clunky line that specifies the match text twice - there has got to be
+        //a better way
+        //This is a prime target for a refactor, if I can ever figure out how to do that
         onView(withText("Verification Success")).inRoot(new ToastMatcher()).check(matches(withText("Verification Success")));
     }
 
+    /**
+     * Reset password test. Re-sets the password back to its original form so the other test
+     * methods begin with the same criteria
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void resetPassword() throws InterruptedException {
         onView(withId(R.id.editTextEmail)).perform(typeText("Test@gmail.ca"));
@@ -101,6 +118,11 @@ public class UItest {
         onView(withText("Password successfully changed")).inRoot(new ToastMatcher()).check(matches(withText("Password successfully changed")));
     }
 
+    /**
+     * View course test.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void viewCourse() throws InterruptedException {
         onView(withId(R.id.editTextEmail)).perform(typeText("Test@gmail.ca"));
@@ -114,6 +136,11 @@ public class UItest {
         onView(withId(R.id.CourseID)).check(matches(withText("Chemistry 2110")));
     }
 
+    /**
+     * Tests that user can add course.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void addCourse() throws InterruptedException {
         onView(withId(R.id.editTextEmail)).perform(typeText("Test@gmail.ca"));
@@ -129,6 +156,11 @@ public class UItest {
         onView(withText("Register Success!")).inRoot(new ToastMatcher()).check(matches(withText("Register Success!")));
     }
 
+    /**
+     * Tests that user can drop a course.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     @Test
     public void dropCourse() throws InterruptedException {
         onView(withId(R.id.editTextEmail)).perform(typeText("Test@gmail.ca"));

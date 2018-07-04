@@ -22,6 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The type Register, for registering users
+ * Basic functionality created by Peter and Mao
+ */
 public class Register extends AppCompatActivity {
 
     private Button btnSubmit;
@@ -43,6 +47,7 @@ public class Register extends AppCompatActivity {
         mPhoneNum = (EditText) findViewById(R.id.etPhone);
         mpassword = (EditText)findViewById(R.id.password);
 
+        //checks to make sure user is not already existing in database
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();

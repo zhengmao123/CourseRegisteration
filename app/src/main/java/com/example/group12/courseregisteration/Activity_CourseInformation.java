@@ -17,6 +17,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.LinkedList;
 
+/**
+ * Displays the detailed information for a single course
+ * Basic functionality written by Peter and Xao
+ * Timing conflict detector was written by Bin He and Chasteen
+ * Register course and drop course added by Jon and Mao
+ * Course slots functionality added by Peter and Mao
+ *
+ */
 public class Activity_CourseInformation extends AppCompatActivity {
 
     //text view
@@ -45,8 +53,14 @@ public class Activity_CourseInformation extends AppCompatActivity {
     private String slots;
 
 
-    //direct to student_id, the child of root Students in Firebase
+    /**
+     * The Student id.
+     */
+//direct to student_id, the child of root Students in Firebase
     final String student_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    /**
+     * The S ref.
+     */
     DatabaseReference sRef = FirebaseDatabase.getInstance().getReference().child("Students").child(student_id);
 
     //list to store the record of time conflict test
@@ -132,7 +146,8 @@ public class Activity_CourseInformation extends AppCompatActivity {
         });
 
 
-        //Drop button
+        //Drop button, only works if user is actually *in* the course
+        //otherwise sends a toast message and waits
         buttonDrop.setOnClickListener(new View.OnClickListener() {
 
 
@@ -166,6 +181,8 @@ public class Activity_CourseInformation extends AppCompatActivity {
         });
 
         //Register button
+        //the timing conflict detector serves double duty as also preventing multiple
+        //registerations in the same class by the same user
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,7 +227,17 @@ public class Activity_CourseInformation extends AppCompatActivity {
 
     }
 
-   //Display the course information
+    /**
+     * Display course. Lots of textviews getting filled out.
+     *
+     * @param prof     the prof
+     * @param name     the name
+     * @param location the location
+     * @param date     the date
+     * @param start    the start
+     * @param end      the end
+     */
+//Display the course information
     public void displayCourse(String prof, String name, String location, String date, String start, String end) {
 
         CourseID = (TextView) findViewById(R.id.CourseID);

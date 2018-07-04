@@ -18,6 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import android.graphics.Color;
 
+/**
+ * The type Activity sign in.
+ * Basic functionality written by Peter and Xao
+ */
 public class Activity_SignIn extends AppCompatActivity {
 
     private Button buttonSignIn;
@@ -33,7 +37,7 @@ public class Activity_SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__sign_in);
 
-
+        //if user is already logged in, go directly to the profile page
         mAuth = FirebaseAuth.getInstance();
 
         if (mAuth.getCurrentUser() != null)
@@ -70,6 +74,9 @@ public class Activity_SignIn extends AppCompatActivity {
     }
 
 
+    /**
+     * User sign in.
+     */
     public void userSignIn(){
 
         String email = editTextEmail.getText().toString().trim();
